@@ -1,5 +1,5 @@
 import CollaborativeRoom from '@/components/CollaborativeRoom'
-import { GetDocument } from '@/lib/actions/room.actions'
+import { getDocument } from '@/lib/actions/room.actions'
 import { getClerkUsers } from '@/lib/actions/user.actions'
 import { currentUser } from '@clerk/nextjs/server'
 import { redirect } from 'next/navigation'
@@ -8,7 +8,7 @@ const Document = async ({ params: { id } }: SearchParamProps) => {
   const clerkUser = await currentUser()
   if (!clerkUser) redirect('/sign-in')
 
-  const room = await GetDocument({
+  const room = await getDocument({
     roomId: id,
     userId: clerkUser.emailAddresses[0].emailAddress,
   })
